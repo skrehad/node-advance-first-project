@@ -43,4 +43,4 @@ const studentSchema = new Schema<Student>({
   isActive: { type: String, required: true },
 });
 
-const Student = model<Student>('User', studentSchema);
+export const StudentModel = model<Student>('User', studentSchema);
