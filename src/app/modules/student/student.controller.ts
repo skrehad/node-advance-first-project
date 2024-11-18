@@ -19,11 +19,11 @@ const createStudent = async (req: Request, res: Response) => {
       message: 'Student created successfully',
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     // Handle validation or other errors
     res.status(400).json({
       success: false,
-      message: 'Validation Failed or Something went wrong',
+      message: error.message || 'Validation Failed or Something went wrong',
       error: error instanceof z.ZodError ? error.errors : error,
     });
   }
