@@ -5,6 +5,7 @@ import {
   UserName,
 } from './student.interface';
 import { Schema, model } from 'mongoose';
+import validator from 'validator';
 
 const userNameSchema = new Schema<UserName>({
   firstName: {
@@ -17,6 +18,10 @@ const userNameSchema = new Schema<UserName>({
     type: String,
     required: [true, 'Last name is required'],
     trim: true,
+    validate: {
+      validator: (value: string) => validator.isAlpha(value),
+      message: '{VALUE} is not a valid character',
+    },
   },
 });
 
@@ -35,6 +40,10 @@ const guardianSchema = new Schema<Guardian>({
     type: String,
     required: [true, "Father's contact number is required"],
     trim: true,
+    validate: {
+      validator: (value: string) => validator.isMobilePhone(value),
+      message: '{VALUE} is not a valid phone number',
+    },
   },
   motherName: {
     type: String,
@@ -50,6 +59,10 @@ const guardianSchema = new Schema<Guardian>({
     type: String,
     required: [true, "Mother's contact number is required"],
     trim: true,
+    validate: {
+      validator: (value: string) => validator.isMobilePhone(value),
+      message: '{VALUE} is not a valid phone number',
+    },
   },
 });
 
@@ -68,6 +81,10 @@ const localGuardianSchema = new Schema<LocalGuardian>({
     type: String,
     required: [true, "Local guardian's contact number is required"],
     trim: true,
+    validate: {
+      validator: (value: string) => validator.isMobilePhone(value),
+      message: '{VALUE} is not a valid phone number',
+    },
   },
   address: {
     type: String,
@@ -99,16 +116,28 @@ const studentSchema = new Schema<Student>({
     required: [true, 'Email is required'],
     unique: true,
     trim: true,
+    validate: {
+      validator: (value: string) => validator.isEmail(value),
+      message: '{VALUE} is not a valid email',
+    },
   },
   contactNo: {
     type: String,
     required: [true, 'Contact number is required'],
     trim: true,
+    validate: {
+      validator: (value: string) => validator.isMobilePhone(value),
+      message: '{VALUE} is not a valid phone number',
+    },
   },
   emergencyContactNo: {
     type: String,
     required: [true, 'Emergency contact number is required'],
     trim: true,
+    validate: {
+      validator: (value: string) => validator.isMobilePhone(value),
+      message: '{VALUE} is not a valid phone number',
+    },
   },
   bloodGroup: {
     type: String,
