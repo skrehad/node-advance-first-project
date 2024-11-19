@@ -48,6 +48,7 @@ const localGuardianValidationSchema = z.object({
 const studentValidationSchema = z.object({
   id: z.string().trim().min(1, 'Student ID is required'),
   name: userNameValidationSchema,
+  password: z.string().trim().max(20, 'Password cannot exceed 20 characters'),
   gender: z.enum(['male', 'female', 'other'], {
     errorMap: () => ({ message: 'Gender must be one of: male, female, other' }),
   }),
@@ -82,6 +83,7 @@ const studentValidationSchema = z.object({
       }),
     })
     .default('active'),
+  // isDeleted: z.boolean(),
 });
 
 export default studentValidationSchema;
