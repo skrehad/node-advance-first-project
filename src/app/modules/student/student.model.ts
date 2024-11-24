@@ -187,10 +187,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       default: 'active',
       trim: true,
     },
-    // isDeleted: {
-    //   type: Boolean,
-    //   default: false,
-    // },
   },
   {
     toJSON: {
@@ -246,11 +242,5 @@ studentSchema.statics.isUserExists = async function (id: string) {
   const existingUser = await Student.findOne({ id });
   return existingUser;
 };
-
-// creating a custom instance method
-// studentSchema.methods.isUserExists = async function (id: string) {
-//   const existingUser = await Student.findOne({ id });
-//   return existingUser;
-// };
 
 export const Student = model<TStudent, StudentModel>('students', studentSchema);
