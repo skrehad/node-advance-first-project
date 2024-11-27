@@ -85,5 +85,5 @@ export const StudentController = {
   createStudent,
   getAllStudents,
   getSingleStudent,
-  deleteStudent,
+  // deleteStudent,
 };
