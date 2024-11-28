@@ -37,7 +37,7 @@ export type TStudent = {
   guardian: TGuardian;
   localGuardian: TLocalGuardian;
   profileImg?: string;
-  // isDeleted: boolean;
+  isDeleted: boolean;
 };
 
 // for creating static

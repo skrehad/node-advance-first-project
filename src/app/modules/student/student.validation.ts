@@ -83,7 +83,7 @@ const studentValidationSchema = z.object({
       }),
     })
     .default('active'),
-  // isDeleted: z.boolean(),
+  isDeleted: z.boolean(),
 });
 
 export default studentValidationSchema;
