@@ -8,10 +8,11 @@ const globalErrorHandler = (
 ) => {
   const statusCode = 500;
   const message = 'Something went wrong';
-  return res.status(statusCode).json({
+  res.status(statusCode).json({
     success: false,
     message,
     error: error,
   });
+  return;
 };
 export default globalErrorHandler;
