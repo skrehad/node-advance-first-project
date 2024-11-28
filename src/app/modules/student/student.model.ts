@@ -7,8 +7,6 @@ import {
 } from './student.interface';
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
-import bcrypt from 'bcrypt';
-import config from '../../config';
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -190,27 +188,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
 // virtual
 studentSchema.virtual('fullName').get(function () {
   return `${this.name.firstName} ${this.name.middleName}  ${this.name.lastName}`;
-});
-
-// pre save middleware hook
-studentSchema.pre('save', async function (next) {
-  // console.log(this, 'pre hook');
-
-  const user = this;
-
-  // hashing password in Db
-  user.password = await bcrypt.hash(
-    user.password,
-    Number(config.bcrypt_salt_rounds),
-  );
-  next();
-});
-
-// post save middleware hook
-studentSchema.post('save', function (doc, next) {
-  doc.password = '';
-  // console.log(this, 'post hook');
-  next();
 });
 
 // Query Middleware Hook
