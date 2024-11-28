@@ -36,26 +36,26 @@ const getSingleStudent = async (
   }
 };
 
-// const deleteStudent = async (req: Request, res: Response) => {
-//   try {
-//     const { studentId } = req.params;
-//     const result = await StudentServices.deleteStudentsFromDb(studentId);
-//     res.status(200).json({
-//       success: true,
-//       message: 'Students is deleted successfully',
-//       data: result,
-//     });
-//   } catch (error: any) {
-//     res.status(400).json({
-//       success: false,
-//       message: error.message || 'Validation Failed or Something went wrong',
-//       error: error instanceof z.ZodError ? error.errors : error,
-//     });
-//   }
-// };
+const deleteStudent = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { studentId } = req.params;
+    const result = await StudentServices.deleteStudentsFromDb(studentId);
+    res.status(200).json({
+      success: true,
+      message: 'Students is deleted successfully',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const StudentController = {
   getAllStudents,
   getSingleStudent,
-  // deleteStudent,
+  deleteStudent,
 };
