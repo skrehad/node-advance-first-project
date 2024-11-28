@@ -1,4 +1,6 @@
+import { Request, Response } from 'express';
 import { UserServices } from './user.service';
+import { z } from 'zod';
 
 const createStudent = async (req: Request, res: Response) => {
   try {
@@ -27,4 +29,8 @@ const createStudent = async (req: Request, res: Response) => {
       error: error instanceof z.ZodError ? error.errors : error,
     });
   }
+};
+
+export const UserControllers = {
+  createStudent,
 };
