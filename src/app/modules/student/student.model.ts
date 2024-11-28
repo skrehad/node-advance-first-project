@@ -110,11 +110,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       unique: true,
       ref: 'User',
     },
-    password: {
-      type: String,
-      required: [true, 'Password is required'],
-      maxlength: [15, 'Password cannot be more than 15 characters'],
-    },
     name: {
       type: userNameSchema,
       required: [true, 'Student name is required'],
