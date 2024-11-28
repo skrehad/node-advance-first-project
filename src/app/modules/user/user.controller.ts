@@ -1,13 +1,13 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { UserServices } from './user.service';
-import { z } from 'zod';
 
-const createStudent = async (req: Request, res: Response) => {
+const createStudent = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { password, student: studentData } = req.body;
-
-    // Validate the data
-    //   const zodParseData = studentValidationSchema.parse(studentData);
 
     // Save the data to the database
     const result = await UserServices.createStudentIntoDB(
@@ -21,13 +21,8 @@ const createStudent = async (req: Request, res: Response) => {
       message: 'Student created successfully',
       data: result,
     });
-  } catch (error: any) {
-    // Handle validation or other errors
-    res.status(400).json({
-      success: false,
-      message: error.message || 'Validation Failed or Something went wrong',
-      error: error instanceof z.ZodError ? error.errors : error,
-    });
+  } catch (error) {
+    next(error);
   }
 };
 

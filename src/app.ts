@@ -15,4 +15,6 @@ app.use('/api/v1/users', UserRoutes);
 
 app.get('/', (req: Request, res: Response) => {});
 
+app.use();
+
 export default app;
