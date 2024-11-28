@@ -184,15 +184,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Local guardian information is required'],
     },
     profileImg: { type: String, trim: true },
-    isActive: {
-      type: String,
-      enum: {
-        values: ['active', 'blocked'],
-        message: 'Status must be either "active" or "blocked"',
-      },
-      default: 'active',
-      trim: true,
-    },
   },
   {
     toJSON: {
