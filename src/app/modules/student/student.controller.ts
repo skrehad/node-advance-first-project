@@ -1,6 +1,7 @@
+import { HttpStatus } from 'http-status-ts';
+import sendResponse from '../../utils/sendResponse';
 import { StudentServices } from './student.service';
 import { NextFunction, Request, Response } from 'express';
-import { z } from 'zod';
 
 const getAllStudents = async (
   req: Request,
@@ -9,9 +10,10 @@ const getAllStudents = async (
 ) => {
   try {
     const result = await StudentServices.getAllStudentsFromDb();
-    res.status(200).json({
+    sendResponse(res, {
+      statusCode: HttpStatus.OK,
       success: true,
-      message: 'Students are retrieved successfully',
+      message: 'Student is created successfully',
       data: result,
     });
   } catch (error) {
@@ -26,9 +28,10 @@ const getSingleStudent = async (
   try {
     const { studentId } = req.params;
     const result = await StudentServices.getSingleStudentsFromDb(studentId);
-    res.status(200).json({
+    sendResponse(res, {
+      statusCode: HttpStatus.OK,
       success: true,
-      message: 'Students is retrieved successfully',
+      message: 'Student is created successfully',
       data: result,
     });
   } catch (error) {
@@ -44,9 +47,10 @@ const deleteStudent = async (
   try {
     const { studentId } = req.params;
     const result = await StudentServices.deleteStudentsFromDb(studentId);
-    res.status(200).json({
+    sendResponse(res, {
+      statusCode: HttpStatus.OK,
       success: true,
-      message: 'Students is deleted successfully',
+      message: 'Student is created successfully',
       data: result,
     });
   } catch (error) {
