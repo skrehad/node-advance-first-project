@@ -53,7 +53,6 @@ userSchema.pre('save', async function (next) {
 // post save middleware hook
 userSchema.post('save', function (doc, next) {
   doc.password = '';
-  // console.log(this, 'post hook');
   next();
 });
 
