@@ -38,6 +38,7 @@ const academicSemesterSchema = new Schema<TAcademicSemester>(
   },
 );
 
+// for testing same Semester is already exists this year?
 academicSemesterSchema.pre('save', async function (next) {
   const isSemesterExists = await AcademicSemester.findOne({
     year: this.year,
