@@ -46,44 +46,47 @@ const localGuardianValidationSchema = z.object({
 
 // Define the Student schema
 const studentValidationSchema = z.object({
-  id: z.string().trim().min(1, 'Student ID is required'),
-  name: userNameValidationSchema,
-  password: z.string().trim().max(20, 'Password cannot exceed 20 characters'),
-  gender: z.enum(['male', 'female', 'other'], {
-    errorMap: () => ({ message: 'Gender must be one of: male, female, other' }),
+  body: z.object({
+    password: z.string().trim().max(20, 'Password cannot exceed 20 characters'),
+    student: z.object({
+      name: userNameValidationSchema,
+      gender: z.enum(['male', 'female', 'other'], {
+        errorMap: () => ({
+          message: 'Gender must be one of: male, female, other',
+        }),
+      }),
+      dateOfBirth: z.string().trim().optional(),
+      email: z.string().trim().email('Invalid email address'),
+      contactNo: z
+        .string()
+        .trim()
+        .min(1, 'Contact number is required')
+        .regex(/^\+?[0-9]{10,15}$/, 'Invalid phone number format'),
+      emergencyContactNo: z
+        .string()
+        .trim()
+        .min(1, 'Emergency contact number is required')
+        .regex(/^\+?[0-9]{10,15}$/, 'Invalid phone number format'),
+      bloodGroup: z
+        .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], {
+          errorMap: () => ({
+            message:
+              'Blood group must be one of: A+, A-, B+, B-, AB+, AB-, O+, O-',
+          }),
+        })
+        .optional(),
+      presentAddress: z.string().trim().min(1, 'Present address is required'),
+      permanentAddress: z
+        .string()
+        .trim()
+        .min(1, 'Permanent address is required'),
+      guardian: guardianValidationSchema,
+      localGuardian: localGuardianValidationSchema,
+      profileImg: z.string().trim().optional(),
+    }),
   }),
-  dateOfBirth: z.string().trim().optional(),
-  email: z.string().trim().email('Invalid email address'),
-  contactNo: z
-    .string()
-    .trim()
-    .min(1, 'Contact number is required')
-    .regex(/^\+?[0-9]{10,15}$/, 'Invalid phone number format'),
-  emergencyContactNo: z
-    .string()
-    .trim()
-    .min(1, 'Emergency contact number is required')
-    .regex(/^\+?[0-9]{10,15}$/, 'Invalid phone number format'),
-  bloodGroup: z
-    .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], {
-      errorMap: () => ({
-        message: 'Blood group must be one of: A+, A-, B+, B-, AB+, AB-, O+, O-',
-      }),
-    })
-    .optional(),
-  presentAddress: z.string().trim().min(1, 'Present address is required'),
-  permanentAddress: z.string().trim().min(1, 'Permanent address is required'),
-  guardian: guardianValidationSchema,
-  localGuardian: localGuardianValidationSchema,
-  profileImg: z.string().trim().optional(),
-  isActive: z
-    .enum(['active', 'blocked'], {
-      errorMap: () => ({
-        message: 'Status must be either "active" or "blocked"',
-      }),
-    })
-    .default('active'),
-  isDeleted: z.boolean(),
 });
 
-export default studentValidationSchema;
+export const studentValidations = {
+  studentValidationSchema,
+};
