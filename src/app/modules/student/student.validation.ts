@@ -45,7 +45,7 @@ const localGuardianValidationSchema = z.object({
 });
 
 // Define the Student schema
-const studentValidationSchema = z.object({
+const createStudentValidationSchema = z.object({
   body: z.object({
     password: z.string().trim().max(20, 'Password cannot exceed 20 characters'),
     student: z.object({
@@ -88,5 +88,5 @@ const studentValidationSchema = z.object({
 });
 
 export const studentValidations = {
-  studentValidationSchema,
+  createStudentValidationSchema,
 };

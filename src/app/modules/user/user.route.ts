@@ -5,12 +5,10 @@ import { studentValidations } from '../student/student.validation';
 
 const router = express.Router();
 
-// for validation by middleware
-
 // for create student
 router.post(
   '/create-student',
-  validateRequest(studentValidations.studentValidationSchema),
+  validateRequest(studentValidations.createStudentValidationSchema),
   UserControllers.createStudent,
 );
 
