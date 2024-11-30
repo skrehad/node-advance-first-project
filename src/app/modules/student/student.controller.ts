@@ -1,16 +1,9 @@
 import { HttpStatus } from 'http-status-ts';
 import sendResponse from '../../utils/sendResponse';
 import { StudentServices } from './student.service';
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import catchAsync from '../../utils/catchAsync';
 
-// for try catch handle by one time calling for all function
-const catchAsync = (fn: RequestHandler) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch((error) => next(error));
-  };
-};
-
-const getAllStudents = catchAsync(async (req, res, next) => {
+const getAllStudents = catchAsync(async (req, res) => {
   const result = await StudentServices.getAllStudentsFromDb();
   sendResponse(res, {
     statusCode: HttpStatus.OK,
@@ -19,7 +12,7 @@ const getAllStudents = catchAsync(async (req, res, next) => {
     data: result,
   });
 });
-const getSingleStudent: RequestHandler = catchAsync(async (req, res, next) => {
+const getSingleStudent = catchAsync(async (req, res) => {
   const { studentId } = req.params;
   const result = await StudentServices.getSingleStudentsFromDb(studentId);
   sendResponse(res, {
@@ -30,7 +23,7 @@ const getSingleStudent: RequestHandler = catchAsync(async (req, res, next) => {
   });
 });
 
-const deleteStudent: RequestHandler = catchAsync(async (req, res, next) => {
+const deleteStudent = catchAsync(async (req, res) => {
   const { studentId } = req.params;
   const result = await StudentServices.deleteStudentsFromDb(studentId);
   sendResponse(res, {
