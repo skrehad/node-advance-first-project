@@ -11,6 +11,13 @@ const createAcademicSemesterIntoDB = async (payload: TAcademicSemester) => {
   return result;
 };
 
+const getAllAcademicSemesterIntoDB = () => {};
+const getSingleAcademicSemesterIntoDB = () => {};
+const updateSingleAcademicSemesterIntoDB = () => {};
+
 export const AcademicSemesterServices = {
   createAcademicSemesterIntoDB,
+  getAllAcademicSemesterIntoDB,
+  getSingleAcademicSemesterIntoDB,
+  updateSingleAcademicSemesterIntoDB,
 };
