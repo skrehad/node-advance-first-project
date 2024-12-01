@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { academicSemesterNameCodeMapper } from './academicSemester.constant';
 import { TAcademicSemester } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
@@ -15,7 +16,19 @@ const getAllAcademicSemesterIntoDB = async () => {
   const result = await AcademicSemester.find();
   return result;
 };
-const getSingleAcademicSemesterIntoDB = async () => {};
+// const getSingleAcademicSemesterIntoDB = async (id: string) => {
+//   const result = await AcademicSemester.findById({ id });
+//   return result;
+// };
+
+// _id aita holo backend a jei name a id thakve
+const getSingleAcademicSemesterIntoDB = async (_id: string) => {
+  const result = await AcademicSemester.findOne({
+    _id: new mongoose.Types.ObjectId(_id),
+  });
+  return result;
+};
+
 const updateSingleAcademicSemesterIntoDB = async () => {};
 
 export const AcademicSemesterServices = {

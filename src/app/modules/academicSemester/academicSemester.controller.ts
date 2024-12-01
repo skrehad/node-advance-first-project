@@ -21,11 +21,22 @@ const getAllAcademicSemester = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Student is created successfully',
+    message: 'All Academic semester is find  successfully',
     data: result,
   });
 });
-const getSingleAcademicSemester = () => {};
+const getSingleAcademicSemester = catchAsync(async (req, res) => {
+  // semesterId ta holo route a jei mane a find korvo mane  '/:semesterId', amon aikhane ja divo akhane tai diye call korvo
+  const { semesterId } = req.params;
+  const result =
+    await AcademicSemesterServices.getSingleAcademicSemesterIntoDB(semesterId);
+  sendResponse(res, {
+    statusCode: HttpStatus.OK,
+    success: true,
+    message: 'Single Academic semester is find  successfully',
+    data: result,
+  });
+});
 const updateSingleAcademicSemester = () => {};
 
 export const AcademicSemesterControllers = {
