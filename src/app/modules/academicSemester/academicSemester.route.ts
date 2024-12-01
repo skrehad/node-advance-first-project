@@ -15,7 +15,7 @@ router.post(
 router.get('/', AcademicSemesterControllers.getAllAcademicSemester);
 router.get('/:id', AcademicSemesterControllers.getSingleAcademicSemester);
 router.patch(
-  '/create-academic-semester',
+  '/:id',
   validateRequest(
     AcademicSemesterValidations.createAcademicSemesterValidationSchema,
   ),
