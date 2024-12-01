@@ -29,7 +29,20 @@ const getSingleAcademicSemesterIntoDB = async (_id: string) => {
   return result;
 };
 
-const updateSingleAcademicSemesterIntoDB = async () => {};
+const updateSingleAcademicSemesterIntoDB = async (
+  semesterId: string,
+  academicData: TAcademicSemester,
+) => {
+  const result = await AcademicSemester.findByIdAndUpdate(
+    semesterId,
+    academicData,
+    {
+      new: true,
+    },
+  );
+
+  return result;
+};
 
 export const AcademicSemesterServices = {
   createAcademicSemesterIntoDB,
