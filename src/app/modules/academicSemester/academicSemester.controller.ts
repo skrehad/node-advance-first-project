@@ -2,7 +2,6 @@ import { HttpStatus } from 'http-status-ts';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { AcademicSemesterServices } from './academicSemester.service';
-import { TAcademicSemester } from './academicSemester.interface';
 
 const createAcademicSemester = catchAsync(async (req, res) => {
   const result = await AcademicSemesterServices.createAcademicSemesterIntoDB(
@@ -43,11 +42,10 @@ const updateSingleAcademicSemester = catchAsync(async (req, res) => {
   const academicData = req.body;
   // console.log(carId);
 
-  const result =
-    await AcademicSemesterServices.updateSingleAcademicSemesterIntoDB(
-      semesterId,
-      academicData,
-    );
+  const result = await AcademicSemesterServices.updateAcademicSemesterIntoDB(
+    semesterId,
+    academicData,
+  );
   res.status(200).json({
     success: true,
     message: 'Car updated successfully',
