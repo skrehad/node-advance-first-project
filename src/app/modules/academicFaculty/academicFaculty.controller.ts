@@ -11,7 +11,7 @@ const createAcademicFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Academic faculty is created succesfully',
+    message: 'Academic faculty is created successfully',
     data: result,
   });
 });
@@ -22,7 +22,7 @@ const getAllAcademicFaculties = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Academic faculties are retrieved successfully',
+    message: 'All Academic faculties are find successfully',
     data: result,
   });
 });
@@ -35,7 +35,7 @@ const getSingleAcademicFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Academic faculty is retrieved succesfully',
+    message: 'Single Academic faculty is find successfully',
     data: result,
   });
 });
