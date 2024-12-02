@@ -37,7 +37,7 @@ const getSingleAcademicDepartment = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Academic department is retrieved succesfully',
+    message: 'Academic department is retrieved successfully',
     data: result,
   });
 });
