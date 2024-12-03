@@ -37,6 +37,23 @@ const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
     ...remainingStudentData,
   };
 
+  /*
+
+  // kiso na korle normally amne jay but amne gele  oi object ar sob kiso coila jaiya sodo ai data e thakvo
+   
+  guardian: {
+      fatherOccupation:"Teacher"
+    }
+
+
+  // ai rokom kore pataite parle sodo jeita patamu oitai update hoivo baki gula thakvo
+    guardian.fatherOccupation = Teacher
+
+    name.firstName = 'A'
+    name.lastName = 'Red'
+  */
+
+  // agula hoitase data( guardian.fatherOccupation = Teacher) abave patanur jonno
   if (name && Object.keys(name).length) {
     for (const [key, value] of Object.entries(name)) {
       modifiedUpdatedData[`name.${key}`] = value;
