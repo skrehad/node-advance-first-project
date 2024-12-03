@@ -26,6 +26,7 @@ const getSingleStudentsFromDb = async (id: string) => {
     });
   return result;
 };
+
 const deleteStudentsFromDb = async (id: string) => {
   const session = await mongoose.startSession();
 
@@ -39,30 +40,30 @@ const deleteStudentsFromDb = async (id: string) => {
     );
 
     if (!deletedStudent) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete user');
+      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete student');
     }
 
     const deletedUser = await User.findOneAndUpdate(
-      {
-        isDeleted: true,
-      },
-      { new: true, session },
+      { id },
+      { isDeleted: true },
       { new: true, session },
     );
 
     if (!deletedUser) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete student');
+      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete user');
     }
 
     await session.commitTransaction();
     await session.endSession();
 
     return deletedStudent;
-  } catch (error) {
+  } catch (err) {
     await session.abortTransaction();
     await session.endSession();
+    throw new Error('Failed to delete student');
   }
 };
+
 export const StudentServices = {
   getAllStudentsFromDb,
   getSingleStudentsFromDb,
