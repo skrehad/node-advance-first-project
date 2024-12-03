@@ -30,40 +30,38 @@ const getSingleStudentsFromDb = (id: string) => {
 };
 
 const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
-  // const { name, guardian, localGuardian, ...remainingStudentData } = payload;
+  //  name, guardian, localGuardian agula muluto jeisob object ar modde aro data ase ...remainingStudentData mane baki data gula
+  const { name, guardian, localGuardian, ...remainingStudentData } = payload;
 
-  // const modifiedUpdatedData: Record<string, unknown> = {
-  //   ...remainingStudentData,
-  // };
+  const modifiedUpdatedData: Record<string, unknown> = {
+    ...remainingStudentData,
+  };
 
-  // if (name && Object.keys(name).length) {
-  //   for (const [key, value] of Object.entries(name)) {
-  //     modifiedUpdatedData[`name.${key}`] = value;
-  //   }
-  // }
+  if (name && Object.keys(name).length) {
+    for (const [key, value] of Object.entries(name)) {
+      modifiedUpdatedData[`name.${key}`] = value;
+    }
+  }
 
-  // if (guardian && Object.keys(guardian).length) {
-  //   for (const [key, value] of Object.entries(guardian)) {
-  //     modifiedUpdatedData[`guardian.${key}`] = value;
-  //   }
-  // }
+  if (guardian && Object.keys(guardian).length) {
+    for (const [key, value] of Object.entries(guardian)) {
+      modifiedUpdatedData[`guardian.${key}`] = value;
+    }
+  }
 
-  // if (localGuardian && Object.keys(localGuardian).length) {
-  //   for (const [key, value] of Object.entries(localGuardian)) {
-  //     modifiedUpdatedData[`localGuardian.${key}`] = value;
-  //   }
-  // }
+  if (localGuardian && Object.keys(localGuardian).length) {
+    for (const [key, value] of Object.entries(localGuardian)) {
+      modifiedUpdatedData[`localGuardian.${key}`] = value;
+    }
+  }
 
   // console.log(modifiedUpdatedData);
 
-  // const result = await Student.findOneAndUpdate({ id }, modifiedUpdatedData, {
-  const result = await Student.findOneAndUpdate(
-    { id },
-    {
-      new: true,
-      runValidators: true,
-    },
-  );
+  const result = await Student.findOneAndUpdate({ id }, modifiedUpdatedData, {
+    new: true,
+    runValidators: true,
+  });
+
   return result;
 };
 
