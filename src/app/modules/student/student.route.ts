@@ -7,6 +7,8 @@ const router = express.Router();
 router.get('/', StudentController.getAllStudents);
 // for get one student data
 router.get('/:studentId', StudentController.getSingleStudent);
+// for student update data
+router.patch('/:studentId', StudentController.getSingleStudent);
 // for delete one student data
 router.delete('/:studentId', StudentController.deleteStudent);
 
