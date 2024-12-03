@@ -102,7 +102,7 @@ const deleteStudentsFromDb = async (id: string) => {
   } catch (err) {
     await session.abortTransaction();
     await session.endSession();
-    throw new Error('Failed to delete student');
+    throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete Student');
   }
 };
 
