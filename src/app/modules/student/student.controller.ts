@@ -31,7 +31,7 @@ const updateStudent = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Student is updated succesfully',
+    message: 'Student is updated successfully',
     data: result,
   });
 });
