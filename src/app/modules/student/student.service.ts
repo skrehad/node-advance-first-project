@@ -15,8 +15,9 @@ const getAllStudentsFromDb = async () => {
     });
   return result;
 };
-const getSingleStudentsFromDb = async (id: string) => {
-  const result = Student.findById(id)
+const getSingleStudentsFromDb = (id: string) => {
+  //  fineOne is custom query from services
+  const result = Student.findOne({ id: id })
     .populate('admissionSemester')
     .populate({
       path: 'academicDepartment',
@@ -34,6 +35,7 @@ const deleteStudentsFromDb = async (id: string) => {
     session.startTransaction();
 
     const deletedStudent = await Student.findOneAndUpdate(
+      // custom generate university id
       { id },
       { isDeleted: true },
       { new: true, session },
@@ -44,6 +46,7 @@ const deleteStudentsFromDb = async (id: string) => {
     }
 
     const deletedUser = await User.findOneAndUpdate(
+      // custom generate university id
       { id },
       { isDeleted: true },
       { new: true, session },
