@@ -5,6 +5,7 @@ import { ZodError } from 'zod';
 import AppError from '../errors/AppError';
 import handleZodError from '../errors/handleZodError';
 import handleValidationError from '../errors/handleValidationError';
+import handleCastError from '../errors/handleCastError';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   // setting default value
