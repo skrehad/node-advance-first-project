@@ -3,8 +3,8 @@ import { TErrorSources } from '../interface/error';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   // setting default value
-  const statusCode = 500;
-  const message = 'Something went wrong';
+  let statusCode = 500;
+  let message = 'Something went wrong';
   let errorSources: TErrorSources = [
     {
       path: '',
@@ -15,7 +15,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   res.status(statusCode).json({
     success: false,
     message,
-    error: error,
+    errorSources,
+    // error: error,
   });
   return;
 };
