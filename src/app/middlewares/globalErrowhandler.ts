@@ -1,5 +1,6 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { TErrorSources } from '../interface/error';
+import config from '../config';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   // setting default value
@@ -12,12 +13,13 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     },
   ];
 
+  //ultimate return
   res.status(statusCode).json({
     success: false,
     message,
     errorSources,
-    // error: error,
+    error,
+    stack: config.NODE_ENV === 'development' ? error?.stack : null,
   });
-  return;
 };
 export default globalErrorHandler;
