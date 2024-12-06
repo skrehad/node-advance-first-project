@@ -5,6 +5,7 @@ import { User } from '../user/user.model';
 import { HttpStatus } from 'http-status-ts';
 import { TStudent } from './student.interface';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { studentSearchableFields } from './student.constant';
 
 const getAllStudentsFromDb = async (query: Record<string, unknown>) => {
   const studentQuery = new QueryBuilder(
