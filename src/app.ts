@@ -13,12 +13,14 @@ app.use(cors());
 // application route
 app.use('/api/v1', router);
 
-// const test = (req: Request, res: Response) => {
-//   const a = 10;
-//   res.send(a);
-// };
+const test = async (req: Request, res: Response) => {
+  Promise.reject();
 
-app.get('/');
+  //   const a = 10;
+  //   res.send(a);
+};
+
+app.get('/', test);
 
 app.use(globalErrorHandler);
 app.use(notFound);
