@@ -5,7 +5,7 @@ import { User } from '../user/user.model';
 import { HttpStatus } from 'http-status-ts';
 import { TStudent } from './student.interface';
 
-const getAllStudentsFromDb = async () => {
+const getAllStudentsFromDb = async (query: Record<string, unknown>) => {
   const result = await Student.find()
     .populate('admissionSemester')
     .populate({
