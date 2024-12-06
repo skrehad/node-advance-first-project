@@ -18,7 +18,7 @@ async function main() {
 
 main();
 
-//  aita hoilo server a kono prb hoile server imediatly off hoiya jay but aita thik na akhon ekta woring diya off hoivo
+//  aita hoilo server a kono prb hoile server imediatly off hoiya jay but aita thik na akhon ekta wronging diya off hoivo
 process.on('unhandledRejection', () => {
   console.log(`😈 unhandledRejection is detected , shutting down ...`);
   if (server) {
@@ -29,6 +29,7 @@ process.on('unhandledRejection', () => {
   process.exit(1);
 });
 
+//  ar aita hoilo amar code a kono vul thakle server off hoiya jaivo
 process.on('uncaughtException', () => {
   console.log(`😈 uncaughtException is detected , shutting down ...`);
   process.exit(1);
