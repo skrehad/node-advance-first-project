@@ -150,7 +150,7 @@ const assignFacultiesWithCourseIntoDB = async (
 
 const removeFacultiesFromCourseFromDB = async (
   id: string,
-  payload: Partial<TCoursefaculty>,
+  payload: Partial<TCourseFaculty>,
 ) => {
   const result = await CourseFaculty.findByIdAndUpdate(
     id,
