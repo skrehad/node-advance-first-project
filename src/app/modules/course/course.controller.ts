@@ -61,39 +61,39 @@ const deleteCourse = catchAsync(async (req, res) => {
   });
 });
 
-const assignFacultiesWithCourse = catchAsync(async (req, res) => {
-  const { courseId } = req.params;
-  const { faculties } = req.body;
+// const assignFacultiesWithCourse = catchAsync(async (req, res) => {
+//   const { courseId } = req.params;
+//   const { faculties } = req.body;
 
-  const result = await CourseServices.assignFacultiesWithCourseIntoDB(
-    courseId,
-    faculties,
-  );
+//   const result = await CourseServices.assignFacultiesWithCourseIntoDB(
+//     courseId,
+//     faculties,
+//   );
 
-  sendResponse(res, {
-    statusCode: HttpStatus.OK,
-    success: true,
-    message: 'Faculties assigned  successfully',
-    data: result,
-  });
-});
+//   sendResponse(res, {
+//     statusCode: HttpStatus.OK,
+//     success: true,
+//     message: 'Faculties assigned  successfully',
+//     data: result,
+//   });
+// });
 
-const removeFacultiesFromCourse = catchAsync(async (req, res) => {
-  const { courseId } = req.params;
-  const { faculties } = req.body;
+// const removeFacultiesFromCourse = catchAsync(async (req, res) => {
+//   const { courseId } = req.params;
+//   const { faculties } = req.body;
 
-  const result = await CourseServices.removeFacultiesFromCourseFromDB(
-    courseId,
-    faculties,
-  );
+//   const result = await CourseServices.removeFacultiesFromCourseFromDB(
+//     courseId,
+//     faculties,
+//   );
 
-  sendResponse(res, {
-    statusCode: HttpStatus.OK,
-    success: true,
-    message: 'Faculties removed  successfully',
-    data: result,
-  });
-});
+//   sendResponse(res, {
+//     statusCode: HttpStatus.OK,
+//     success: true,
+//     message: 'Faculties removed  successfully',
+//     data: result,
+//   });
+// });
 
 export const CourseControllers = {
   createCourse,
@@ -101,6 +101,6 @@ export const CourseControllers = {
   getAllCourses,
   updateCourse,
   deleteCourse,
-  assignFacultiesWithCourse,
-  removeFacultiesFromCourse,
+  //   assignFacultiesWithCourse,
+  //   removeFacultiesFromCourse,
 };
