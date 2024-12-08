@@ -3,6 +3,17 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { FacultyServices } from './faculty.service';
 
+const getAllFaculties = catchAsync(async (req, res) => {
+  const result = await FacultyServices.getAllFacultiesFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: HttpStatus.OK,
+    success: true,
+    message: 'All Faculties are find successfully',
+    data: result,
+  });
+});
+
 const getSingleFaculty = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await FacultyServices.getSingleFacultyFromDB(id);
@@ -10,18 +21,7 @@ const getSingleFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Faculty is retrieved succesfully',
-    data: result,
-  });
-});
-
-const getAllFaculties = catchAsync(async (req, res) => {
-  const result = await FacultyServices.getAllFacultiesFromDB(req.query);
-
-  sendResponse(res, {
-    statusCode: HttpStatus.OK,
-    success: true,
-    message: 'Faculties are retrieved succesfully',
+    message: ' Single Faculty is find successfully',
     data: result,
   });
 });
@@ -34,7 +34,7 @@ const updateFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Faculty is updated succesfully',
+    message: 'Faculty is updated successfully',
     data: result,
   });
 });
@@ -46,7 +46,7 @@ const deleteFaculty = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Faculty is deleted succesfully',
+    message: 'Faculty is deleted successfully',
     data: result,
   });
 });
