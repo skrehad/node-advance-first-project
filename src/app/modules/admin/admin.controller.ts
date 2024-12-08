@@ -3,6 +3,17 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { AdminServices } from './admin.service';
 
+const getAllAdmins = catchAsync(async (req, res) => {
+  const result = await AdminServices.getAllAdminsFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: HttpStatus.OK,
+    success: true,
+    message: 'All Admins are find successfully',
+    data: result,
+  });
+});
+
 const getSingleAdmin = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await AdminServices.getSingleAdminFromDB(id);
@@ -11,17 +22,6 @@ const getSingleAdmin = catchAsync(async (req, res) => {
     statusCode: HttpStatus.OK,
     success: true,
     message: 'Single Admin find successfully',
-    data: result,
-  });
-});
-
-const getAllAdmins = catchAsync(async (req, res) => {
-  const result = await AdminServices.getAllAdminsFromDB(req.query);
-
-  sendResponse(res, {
-    statusCode: HttpStatus.OK,
-    success: true,
-    message: 'All Admins are find successfully',
     data: result,
   });
 });
