@@ -9,7 +9,7 @@ const createCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Course is created succesfully',
+    message: 'Course is created successfully',
     data: result,
   });
 });
@@ -20,7 +20,7 @@ const getAllCourses = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Course are retrieved successfully',
+    message: 'All Course are find successfully',
     data: result,
   });
 });
@@ -32,7 +32,7 @@ const getSingleCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Course is retrieved successfully',
+    message: 'Single Course find successfully',
     data: result,
   });
 });
