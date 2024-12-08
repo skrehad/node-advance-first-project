@@ -16,6 +16,7 @@ import { HttpStatus } from 'http-status-ts';
 import { AcademicDepartment } from '../academicDepartment/academicDepartment.model';
 import { Faculty } from '../faculty/faculty.model';
 import { TFaculty } from '../faculty/faculty.interface';
+import { Admin } from '../admin/admin.model';
 
 const createStudentIntoDB = async (password: string, studentData: TStudent) => {
   //   create a user object
