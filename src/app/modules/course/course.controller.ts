@@ -32,7 +32,7 @@ const getSingleCourse = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
-    message: 'Single Course find successfully',
+    message: 'Single Course is find successfully',
     data: result,
   });
 });
