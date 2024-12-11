@@ -54,7 +54,7 @@ const createSemesterRegistrationIntoDB = async (
   if (isSemesterRegistrationExists) {
     throw new AppError(
       HttpStatus.CONFLICT,
-      'This semester is already registered!',
+      'This semester is already registered',
     );
   }
 
