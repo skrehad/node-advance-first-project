@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { HttpStatus } from 'http-status-ts';
+import { SemesterRegistrationService } from './semesterRegistration.service';
 
 const createSemesterRegistration = catchAsync(
   async (req: Request, res: Response) => {
@@ -71,25 +72,25 @@ const updateSemesterRegistration = catchAsync(
   },
 );
 
-const deleteSemesterRegistration = catchAsync(
-  async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const result =
-      await SemesterRegistrationService.deleteSemesterRegistrationFromDB(id);
+// const deleteSemesterRegistration = catchAsync(
+//   async (req: Request, res: Response) => {
+//     const { id } = req.params;
+//     const result =
+//       await SemesterRegistrationService.deleteSemesterRegistrationFromDB(id);
 
-    sendResponse(res, {
-      statusCode: HttpStatus.OK,
-      success: true,
-      message: 'Semester Registration is updated successfully',
-      data: result,
-    });
-  },
-);
+//     sendResponse(res, {
+//       statusCode: HttpStatus.OK,
+//       success: true,
+//       message: 'Semester Registration is updated successfully',
+//       data: result,
+//     });
+//   },
+// );
 
 export const SemesterRegistrationController = {
   createSemesterRegistration,
   getAllSemesterRegistrations,
   getSingleSemesterRegistration,
   updateSemesterRegistration,
-  deleteSemesterRegistration,
+  // deleteSemesterRegistration,
 };
