@@ -130,23 +130,23 @@ const deleteCourseFromDB = async (id: string) => {
   return result;
 };
 
-// const assignFacultiesWithCourseIntoDB = async (
-//   id: string,
-//   payload: Partial<TCourseFaculty>,
-// ) => {
-//   const result = await CourseFaculty.findByIdAndUpdate(
-//     id,
-//     {
-//       course: id,
-//       $addToSet: { faculties: { $each: payload } },
-//     },
-//     {
-//       upsert: true,
-//       new: true,
-//     },
-//   );
-//   return result;
-// };
+const assignFacultiesWithCourseIntoDB = async (
+  id: string,
+  payload: Partial<TCourseFaculty>,
+) => {
+  const result = await CourseFaculty.findByIdAndUpdate(
+    id,
+    {
+      course: id,
+      $addToSet: { faculties: { $each: payload } },
+    },
+    {
+      upsert: true,
+      new: true,
+    },
+  );
+  return result;
+};
 
 // const removeFacultiesFromCourseFromDB = async (
 //   id: string,
