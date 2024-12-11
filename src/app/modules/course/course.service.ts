@@ -112,7 +112,7 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
     );
 
     return result;
-  } catch (err) {
+  } catch (error) {
     await session.abortTransaction();
     await session.endSession();
     throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to update course');
