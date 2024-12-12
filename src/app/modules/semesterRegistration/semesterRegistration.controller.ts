@@ -48,7 +48,7 @@ const getSingleSemesterRegistration = catchAsync(
     sendResponse(res, {
       statusCode: HttpStatus.OK,
       success: true,
-      message: 'Single Semester Registration is find successfully',
+      message: 'Single Semester Registration find successfully',
       data: result,
     });
   },
