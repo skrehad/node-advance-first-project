@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 import config from '../../config';
 import AppError from '../../errors/AppError';
-import { User } from '../user/user.model';
 import { TLoginUser } from './auth.interface';
 import { HttpStatus } from 'http-status-ts';
+import { User } from '../user/user.model';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -16,22 +16,22 @@ const loginUser = async (payload: TLoginUser) => {
 
   const isDeleted = user?.isDeleted;
 
-  //   if (isDeleted) {
-  //     throw new AppError(HttpStatus.FORBIDDEN, 'This user is deleted !');
-  //   }
+  if (isDeleted) {
+    throw new AppError(HttpStatus.FORBIDDEN, 'This user is deleted !');
+  }
 
   // checking if the user is blocked
 
   const userStatus = user?.status;
 
-  //   if (userStatus === 'blocked') {
-  //     throw new AppError(HttpStatus.FORBIDDEN, 'This user is blocked ! !');
-  //   }
+  if (userStatus === 'blocked') {
+    throw new AppError(HttpStatus.FORBIDDEN, 'This user is blocked ! !');
+  }
 
   //checking if the password is correct
 
-  //   if (!(await User.isPasswordMatched(payload?.password, user?.password)))
-  //     throw new AppError(HttpStatus.FORBIDDEN, 'Password do not matched');
+  if (!(await User.isPasswordMatched(payload?.password, user?.password)))
+    throw new AppError(HttpStatus.FORBIDDEN, 'Password do not matched');
 
   //create token and sent to the  client
 
@@ -53,8 +53,8 @@ const loginUser = async (payload: TLoginUser) => {
   //   );
 
   return {
-    accessToken,
-    refreshToken,
+    // accessToken,
+    // refreshToken,
     needsPasswordChange: user?.needsPasswordChange,
   };
 };
