@@ -2,6 +2,8 @@ import AppError from '../../errors/AppError';
 import { TLoginUser } from './auth.interface';
 import { HttpStatus } from 'http-status-ts';
 import { User } from '../user/user.model';
+import config from '../../config';
+import { createToken } from './auth.utils';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -38,11 +40,11 @@ const loginUser = async (payload: TLoginUser) => {
     role: user.role,
   };
 
-  //   const accessToken = createToken(
-  //     jwtPayload,
-  //     config.jwt_access_secret as string,
-  //     config.jwt_access_expires_in as string,
-  //   );
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    // config.jwt_access_expires_in as string,
+  );
 
   //   const refreshToken = createToken(
   //     jwtPayload,
@@ -51,7 +53,7 @@ const loginUser = async (payload: TLoginUser) => {
   //   );
 
   return {
-    // accessToken,
+    accessToken,
     // refreshToken,
     needsPasswordChange: user?.needsPasswordChange,
   };
