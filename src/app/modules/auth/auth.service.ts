@@ -1,5 +1,3 @@
-import bcrypt from 'bcrypt';
-import config from '../../config';
 import AppError from '../../errors/AppError';
 import { TLoginUser } from './auth.interface';
 import { HttpStatus } from 'http-status-ts';
