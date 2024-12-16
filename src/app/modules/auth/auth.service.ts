@@ -45,7 +45,7 @@ const loginUser = async (payload: TLoginUser) => {
   const accessToken = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
-    // config.jwt_access_expires_in as string,
+    config.jwt_access_expires_in as string,
   );
 
   //   const refreshToken = createToken(
@@ -106,6 +106,7 @@ const changePassword = async (
     {
       password: newHashedPassword,
       needsPasswordChange: false,
+      // for when password is changed
       passwordChangedAt: new Date(),
     },
   );
