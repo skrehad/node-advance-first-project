@@ -5,7 +5,7 @@ import { HttpStatus } from 'http-status-ts';
 import { User } from '../user/user.model';
 import config from '../../config';
 import { createToken } from './auth.utils';
-import { JwtPayload } from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
