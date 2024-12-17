@@ -101,6 +101,7 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
   }
 
   const session = await mongoose.startSession();
+  console.log(HttpStatus.HttpStatus.OK);
 
   try {
     session.startTransaction();
@@ -153,7 +154,7 @@ const createAdminIntoDB = async (password: string, payload: TFaculty) => {
   userData.role = 'admin';
 
   const session = await mongoose.startSession();
-  // console.log(HttpStatus.HttpStatus.HttpStatus.HttpStatus.OK);
+  // console.log(HttpStatus.HttpStatus.OK);
 
   try {
     session.startTransaction();
