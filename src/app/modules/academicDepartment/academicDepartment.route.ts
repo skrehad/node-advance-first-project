@@ -16,15 +16,21 @@ router.post(
   AcademicDepartmentControllers.createAcademicDepartment,
 );
 
-router.get('/', AcademicDepartmentControllers.getAllAcademicDepartments);
+router.get(
+  '/',
+  auth(USER_ROLE.admin),
+  AcademicDepartmentControllers.getAllAcademicDepartments,
+);
 
 router.get(
   '/:departmentId',
+  auth(USER_ROLE.admin),
   AcademicDepartmentControllers.getSingleAcademicDepartment,
 );
 
 router.patch(
   '/:departmentId',
+  auth(USER_ROLE.admin),
   validateRequest(
     AcademicDepartmentValidation.updateAcademicDepartmentValidationSchema,
   ),
