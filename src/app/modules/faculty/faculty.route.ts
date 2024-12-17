@@ -7,15 +7,16 @@ import { USER_ROLE } from '../user/user.constant';
 
 const router = express.Router();
 
-router.get('/:id', FacultyControllers.getSingleFaculty);
+router.get('/:id', auth(USER_ROLE.admin), FacultyControllers.getSingleFaculty);
 
 router.patch(
   '/:id',
+  auth(USER_ROLE.admin),
   validateRequest(updateFacultyValidationSchema),
   FacultyControllers.updateFaculty,
 );
 
-router.delete('/:id', FacultyControllers.deleteFaculty);
+router.delete('/:id', auth(USER_ROLE.admin), FacultyControllers.deleteFaculty);
 
 router.get(
   '/',
