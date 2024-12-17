@@ -1,6 +1,6 @@
 import { UserServices } from './user.service';
 import sendResponse from '../../utils/sendResponse';
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 import catchAsync from '../../utils/catchAsync';
 
 const createStudent = catchAsync(async (req, res) => {
@@ -10,7 +10,7 @@ const createStudent = catchAsync(async (req, res) => {
   const result = await UserServices.createStudentIntoDB(password, studentData);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Student is created successfully',
     data: result,
@@ -23,7 +23,7 @@ const createFaculty = catchAsync(async (req, res) => {
   const result = await UserServices.createFacultyIntoDB(password, facultyData);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Faculty is created successfully',
     data: result,
@@ -36,7 +36,7 @@ const createAdmin = catchAsync(async (req, res) => {
   const result = await UserServices.createAdminIntoDB(password, adminData);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Admin is created successfully',
     data: result,

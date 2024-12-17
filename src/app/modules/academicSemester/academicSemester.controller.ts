@@ -1,4 +1,4 @@
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { AcademicSemesterServices } from './academicSemester.service';
@@ -9,7 +9,7 @@ const createAcademicSemester = catchAsync(async (req, res) => {
   );
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Academic semester is created successfully',
     data: result,
@@ -19,7 +19,7 @@ const createAcademicSemester = catchAsync(async (req, res) => {
 const getAllAcademicSemester = catchAsync(async (req, res) => {
   const result = await AcademicSemesterServices.getAllAcademicSemesterIntoDB();
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All Academic semester is find  successfully',
     data: result,
@@ -31,7 +31,7 @@ const getSingleAcademicSemester = catchAsync(async (req, res) => {
   const result =
     await AcademicSemesterServices.getSingleAcademicSemesterIntoDB(semesterId);
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Single Academic semester is find  successfully',
     data: result,

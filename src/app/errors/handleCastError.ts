@@ -6,8 +6,8 @@ const handleCastError = (
 ): TGenericErrorResponse => {
   const errorSources: TErrorSources = [
     {
-      path: err.path,
-      message: err.message,
+      path: err.path || 'Unknown Path', // Ensure 'path' has a fallback
+      message: err.message || 'Invalid ID Format', // More descriptive message
     },
   ];
 
@@ -15,7 +15,7 @@ const handleCastError = (
 
   return {
     statusCode,
-    message: 'Invalid ID',
+    message: 'Invalid ID Format', // More specific message
     errorSources,
   };
 };

@@ -1,4 +1,4 @@
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { CourseServices } from './course.service';
@@ -7,7 +7,7 @@ const createCourse = catchAsync(async (req, res) => {
   const result = await CourseServices.createCourseIntoDB(req.body);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Course is created successfully',
     data: result,
@@ -18,7 +18,7 @@ const getAllCourses = catchAsync(async (req, res) => {
   const result = await CourseServices.getAllCoursesFromDB(req.query);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All Course are find successfully',
     data: result,
@@ -30,7 +30,7 @@ const getSingleCourse = catchAsync(async (req, res) => {
   const result = await CourseServices.getSingleCourseFromDB(id);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Single Course is find successfully',
     data: result,
@@ -42,7 +42,7 @@ const updateCourse = catchAsync(async (req, res) => {
   const result = await CourseServices.updateCourseIntoDB(id, req.body);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'course is updated successfully',
     data: result,
@@ -54,7 +54,7 @@ const deleteCourse = catchAsync(async (req, res) => {
   const result = await CourseServices.deleteCourseFromDB(id);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Course is deleted successfully',
     data: result,
@@ -71,7 +71,7 @@ const assignFacultiesWithCourse = catchAsync(async (req, res) => {
   );
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Faculties assigned  successfully',
     data: result,
@@ -88,7 +88,7 @@ const removeFacultiesFromCourse = catchAsync(async (req, res) => {
   );
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Faculties removed  successfully',
     data: result,

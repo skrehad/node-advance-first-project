@@ -5,7 +5,7 @@ import { User } from '../user/user.model';
 import { AdminSearchableFields } from './admin.constant';
 import { TAdmin } from './admin.interface';
 import { Admin } from './admin.model';
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 
 const getAllAdminsFromDB = async (query: Record<string, unknown>) => {
   const adminQuery = new QueryBuilder(Admin.find(), query)
@@ -57,7 +57,10 @@ const deleteAdminFromDB = async (id: string) => {
     );
 
     if (!deletedAdmin) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete student');
+      throw new AppError(
+        HttpStatus.HttpStatus.BAD_REQUEST,
+        'Failed to delete student',
+      );
     }
 
     // get user _id from deletedAdmin
@@ -70,7 +73,10 @@ const deleteAdminFromDB = async (id: string) => {
     );
 
     if (!deletedUser) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete user');
+      throw new AppError(
+        HttpStatus.HttpStatus.BAD_REQUEST,
+        'Failed to delete user',
+      );
     }
 
     await session.commitTransaction();

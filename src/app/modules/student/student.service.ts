@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Student } from './student.model';
 import AppError from '../../errors/AppError';
 import { User } from '../user/user.model';
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 import { TStudent } from './student.interface';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { studentSearchableFields } from './student.constant';
@@ -106,7 +106,10 @@ const deleteStudentsFromDb = async (id: string) => {
     );
 
     if (!deletedStudent) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete student');
+      throw new AppError(
+        HttpStatus.HttpStatus.BAD_REQUEST,
+        'Failed to delete student',
+      );
     }
 
     const userId = deletedStudent.user;
@@ -118,7 +121,10 @@ const deleteStudentsFromDb = async (id: string) => {
     );
 
     if (!deletedUser) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete user');
+      throw new AppError(
+        HttpStatus.HttpStatus.BAD_REQUEST,
+        'Failed to delete user',
+      );
     }
 
     await session.commitTransaction();
@@ -128,7 +134,10 @@ const deleteStudentsFromDb = async (id: string) => {
   } catch (err) {
     await session.abortTransaction();
     await session.endSession();
-    throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete Student');
+    throw new AppError(
+      HttpStatus.HttpStatus.BAD_REQUEST,
+      'Failed to delete Student',
+    );
   }
 };
 

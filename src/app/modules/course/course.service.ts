@@ -4,7 +4,7 @@ import AppError from '../../errors/AppError';
 import { CourseSearchableFields } from './course.constant';
 import { TCourse, TCourseFaculty } from './course.interface';
 import { Course, CourseFaculty } from './course.model';
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 
 const createCourseIntoDB = async (payload: TCourse) => {
   const result = await Course.create(payload);
@@ -53,7 +53,10 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
     );
 
     if (!updatedBasicCourseInfo) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to update course!');
+      throw new AppError(
+        HttpStatus.HttpStatus.BAD_REQUEST,
+        'Failed to update course!',
+      );
     }
 
     // check if there is any pre requisite courses to update
@@ -78,7 +81,10 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
       );
 
       if (!deletedPreRequisiteCourses) {
-        throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to update course!');
+        throw new AppError(
+          HttpStatus.HttpStatus.BAD_REQUEST,
+          'Failed to update course!',
+        );
       }
 
       // filter out the new course fields
@@ -99,7 +105,10 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
       );
 
       if (!newPreRequisiteCourses) {
-        throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to update course!');
+        throw new AppError(
+          HttpStatus.HttpStatus.BAD_REQUEST,
+          'Failed to update course!',
+        );
       }
     }
 
@@ -114,7 +123,10 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
   } catch (error) {
     await session.abortTransaction();
     await session.endSession();
-    throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to update course');
+    throw new AppError(
+      HttpStatus.HttpStatus.BAD_REQUEST,
+      'Failed to update course',
+    );
   }
 };
 

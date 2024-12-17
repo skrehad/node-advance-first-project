@@ -5,7 +5,7 @@ import { User } from '../user/user.model';
 import { FacultySearchableFields } from './faculty.constant';
 import { TFaculty } from './faculty.interface';
 import { Faculty } from './faculty.model';
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 
 const getAllFacultiesFromDB = async (query: Record<string, unknown>) => {
   const facultyQuery = new QueryBuilder(
@@ -61,7 +61,10 @@ const deleteFacultyFromDB = async (id: string) => {
     );
 
     if (!deletedFaculty) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete faculty');
+      throw new AppError(
+        HttpStatus.HttpStatus.BAD_REQUEST,
+        'Failed to delete faculty',
+      );
     }
 
     // get user _id from deletedFaculty
@@ -74,7 +77,10 @@ const deleteFacultyFromDB = async (id: string) => {
     );
 
     if (!deletedUser) {
-      throw new AppError(HttpStatus.BAD_REQUEST, 'Failed to delete user');
+      throw new AppError(
+        HttpStatus.HttpStatus.BAD_REQUEST,
+        'Failed to delete user',
+      );
     }
 
     await session.commitTransaction();

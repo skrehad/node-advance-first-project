@@ -1,4 +1,4 @@
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { AdminServices } from './admin.service';
@@ -7,7 +7,7 @@ const getAllAdmins = catchAsync(async (req, res) => {
   const result = await AdminServices.getAllAdminsFromDB(req.query);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All Admins are find successfully',
     data: result,
@@ -19,7 +19,7 @@ const getSingleAdmin = catchAsync(async (req, res) => {
   const result = await AdminServices.getSingleAdminFromDB(id);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Single Admin find successfully',
     data: result,
@@ -32,7 +32,7 @@ const updateAdmin = catchAsync(async (req, res) => {
   const result = await AdminServices.updateAdminIntoDB(id, admin);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Admin is updated successfully',
     data: result,
@@ -44,7 +44,7 @@ const deleteAdmin = catchAsync(async (req, res) => {
   const result = await AdminServices.deleteAdminFromDB(id);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Admin is deleted successfully',
     data: result,

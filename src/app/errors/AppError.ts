@@ -3,7 +3,7 @@ class AppError extends Error {
 
   constructor(statusCode: number, message: string, stack = '') {
     super(message);
-    this.statusCode = statusCode;
+    this.statusCode = statusCode; // Fix: Use statusCode here, not HttpStatusCode
 
     if (stack) {
       this.stack = stack;

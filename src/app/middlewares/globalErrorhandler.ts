@@ -1,4 +1,4 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import { ErrorRequestHandler } from 'express';
 import { TErrorSources } from '../interface/error';
 import config from '../config';
 import { ZodError } from 'zod';
@@ -21,39 +21,47 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
 
   if (error instanceof ZodError) {
     const simplifiedError = handleZodError(error);
-    statusCode = simplifiedError?.statusCode;
-    message = simplifiedError?.message;
-    errorSources = simplifiedError?.errorSources;
+    statusCode = simplifiedError?.statusCode ?? 400; // Set default if undefined
+    message = simplifiedError?.message ?? 'Validation Error';
+    errorSources = simplifiedError?.errorSources ?? [
+      { path: '', message: 'Validation error occurred' },
+    ];
   } else if (error?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(error);
-    statusCode = simplifiedError?.statusCode;
-    message = simplifiedError?.message;
-    errorSources = simplifiedError?.errorSources;
+    statusCode = simplifiedError?.statusCode ?? 400;
+    message = simplifiedError?.message ?? 'Validation Error';
+    errorSources = simplifiedError?.errorSources ?? [
+      { path: '', message: 'Validation error occurred' },
+    ];
   } else if (error?.name === 'CastError') {
     const simplifiedError = handleCastError(error);
-    statusCode = simplifiedError?.statusCode;
-    message = simplifiedError?.message;
-    errorSources = simplifiedError?.errorSources;
+    statusCode = simplifiedError?.statusCode ?? 400;
+    message = simplifiedError?.message ?? 'Invalid ID format';
+    errorSources = simplifiedError?.errorSources ?? [
+      { path: '', message: 'Invalid ID' },
+    ];
   } else if (error?.code === 11000) {
     const simplifiedError = handleDuplicateError(error);
-    statusCode = simplifiedError?.statusCode;
-    message = simplifiedError?.message;
-    errorSources = simplifiedError?.errorSources;
+    statusCode = simplifiedError?.statusCode ?? 400;
+    message = simplifiedError?.message ?? 'Duplicate Key Error';
+    errorSources = simplifiedError?.errorSources ?? [
+      { path: '', message: 'Duplicate key found' },
+    ];
   } else if (error instanceof AppError) {
-    statusCode = error?.statusCode;
-    message = error.message;
+    statusCode = error?.statusCode ?? 500;
+    message = error.message ?? 'Unknown application error';
     errorSources = [
       {
         path: '',
-        message: error?.message,
+        message: error?.message ?? 'Unknown error occurred',
       },
     ];
   } else if (error instanceof Error) {
-    message = error.message;
+    message = error.message ?? 'Unknown error';
     errorSources = [
       {
         path: '',
-        message: error?.message,
+        message: error?.message ?? 'Unknown error occurred',
       },
     ];
   }

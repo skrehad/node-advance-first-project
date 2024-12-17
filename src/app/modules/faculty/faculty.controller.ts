@@ -1,4 +1,4 @@
-import { HttpStatus } from 'http-status-ts';
+const HttpStatus = require('http-status-ts');
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { FacultyServices } from './faculty.service';
@@ -7,7 +7,7 @@ const getAllFaculties = catchAsync(async (req, res) => {
   const result = await FacultyServices.getAllFacultiesFromDB(req.query);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All Faculties are find successfully',
     data: result,
@@ -19,7 +19,7 @@ const getSingleFaculty = catchAsync(async (req, res) => {
   const result = await FacultyServices.getSingleFacultyFromDB(id);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: ' Single Faculty is find successfully',
     data: result,
@@ -32,7 +32,7 @@ const updateFaculty = catchAsync(async (req, res) => {
   const result = await FacultyServices.updateFacultyIntoDB(id, faculty);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Faculty is updated successfully',
     data: result,
@@ -44,7 +44,7 @@ const deleteFaculty = catchAsync(async (req, res) => {
   const result = await FacultyServices.deleteFacultyFromDB(id);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Faculty is deleted successfully',
     data: result,
