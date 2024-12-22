@@ -6,6 +6,7 @@ import { User } from '../user/user.model';
 import config from '../../config';
 import { createToken } from './auth.utils';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { sendEmail } from '../../utils/sendEmail';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -244,8 +245,12 @@ const forgetPassword = async (userId: string) => {
     '10m',
   );
 
-  const resetUILink = `http://localhost:3000?/id=${user.id}&token=${resetToken}`;
-  console.log(resetUILink);
+  const resetUILink = `${config.reset_pass_ui_link}?/id=${user.id}&token=${resetToken}`;
+
+  // for sending massage reset password
+  sendEmail(user.email, resetUILink);
+
+  // console.log('hello....................', resetUILink);
 };
 
 export const AuthServices = {
