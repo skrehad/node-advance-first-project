@@ -49,14 +49,14 @@ const refreshToken = catchAsync(async (req, res) => {
 });
 
 const forgetPassword = catchAsync(async (req, res) => {
-  // const { refreshToken } = req.cookies;
-  // const result = await AuthServices.refreshToken(refreshToken);
-  // sendResponse(res, {
-  //   statusCode: HttpStatus.HttpStatus.OK,
-  //   success: true,
-  //   message: 'Access token is retrieved successfully!',
-  //   data: result,
-  // });
+  const userId = req.body.id;
+  const result = await AuthServices.forgetPassword(userId);
+  sendResponse(res, {
+    statusCode: HttpStatus.HttpStatus.OK,
+    success: true,
+    message: 'Resent link create successfully!',
+    data: result,
+  });
 });
 
 export const AuthControllers = {
