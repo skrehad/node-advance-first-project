@@ -20,7 +20,7 @@ router.delete('/:id', auth(USER_ROLE.admin), FacultyControllers.deleteFaculty);
 
 router.get(
   '/',
-  auth(USER_ROLE.admin, USER_ROLE.faculty),
+  // auth(USER_ROLE.admin, USER_ROLE.faculty),
   FacultyControllers.getAllFaculties,
 );
 

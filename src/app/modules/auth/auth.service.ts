@@ -54,6 +54,8 @@ const loginUser = async (payload: TLoginUser) => {
     role: user.role,
   };
 
+  console.log(jwtPayload);
+
   const accessToken = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
