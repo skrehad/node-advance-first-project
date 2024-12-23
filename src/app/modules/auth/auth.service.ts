@@ -255,7 +255,7 @@ const forgetPassword = async (userId: string) => {
 
 const resetPassword = async (
   payload: { id: string; newPassword: string },
-  token,
+  token: string,
 ) => {
   // checking if the user is exist
   const user = await User.isUserExistsByCustomId(payload.id);
@@ -285,6 +285,37 @@ const resetPassword = async (
       'This user is blocked ! !',
     );
   }
+
+  const decoded = jwt.verify(
+    token,
+    config.jwt_access_secret as string,
+  ) as JwtPayload;
+
+  // console.log('hello..........', decoded);
+
+  if (payload.id !== decoded.userId) {
+    throw new AppError(HttpStatus.HttpStatus.FORBIDDEN, 'You are forbidden');
+  }
+
+  //hash new password
+  const newHashedPassword = await bcrypt.hash(
+    payload.newPassword,
+    Number(config.bcrypt_salt_rounds),
+  );
+
+  // update password
+  await User.findOneAndUpdate(
+    {
+      id: decoded.userId,
+      role: decoded.role,
+    },
+    {
+      password: newHashedPassword,
+      needsPasswordChange: false,
+      // for when password is changed
+      passwordChangedAt: new Date(),
+    },
+  );
 };
 
 export const AuthServices = {
