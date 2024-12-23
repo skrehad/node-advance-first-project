@@ -149,6 +149,8 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
   }
 };
 
+// create admin
+
 const createAdminIntoDB = async (password: string, payload: TFaculty) => {
   const userData: Partial<TUser> = {};
 
