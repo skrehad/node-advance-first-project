@@ -45,17 +45,14 @@ const createAdmin = catchAsync(async (req, res) => {
 });
 
 const getMe = catchAsync(async (req, res) => {
-  const token = req.headers.authorization;
-  if (!token) {
-    throw new AppError(HttpStatus.HttpStatus.NOT_FOUND, 'token not found');
-  }
+  const { userId, role } = req.user;
 
-  const result = await UserServices.getMeIntoDB(token);
+  const result = await UserServices.getMeIntoDB(userId, role);
 
   sendResponse(res, {
     statusCode: HttpStatus.HttpStatus.OK,
     success: true,
-    message: 'Admin is created successfully',
+    message: 'User is find successfully',
     data: result,
   });
 });

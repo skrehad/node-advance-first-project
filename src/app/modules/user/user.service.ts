@@ -150,7 +150,6 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 };
 
 // create admin
-
 const createAdminIntoDB = async (password: string, payload: TFaculty) => {
   const userData: Partial<TUser> = {};
 
@@ -214,10 +213,10 @@ const createAdminIntoDB = async (password: string, payload: TFaculty) => {
 };
 
 // for get own data
-const getMeIntoDB = async (token: string) => {
-  const decoded = verifyToken(token, config.jwt_access_secret as string);
+const getMeIntoDB = async (userId: string, role: string) => {
+  // const decoded = verifyToken(token, config.jwt_access_secret as string);
 
-  const { userId, role } = decoded;
+  // const { userId, role } = decoded;
   let result = null;
 
   if (role === 'student') {
