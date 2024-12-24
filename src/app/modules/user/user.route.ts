@@ -3,9 +3,10 @@ import { UserControllers } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { studentValidations } from '../student/student.validation';
 import { createFacultyValidationSchema } from '../faculty/faculty.validation';
-import { createAdminValidationSchema } from '../admin/admin.validation';
+import { AdminValidations } from '../admin/admin.validation';
 import auth from '../../middlewares/auth';
 import { USER_ROLE } from './user.constant';
+import { UserValidation } from './user.validation';
 
 const router = express.Router();
 
@@ -27,8 +28,15 @@ router.post(
 router.post(
   '/create-admin',
   auth(USER_ROLE.admin),
-  validateRequest(createAdminValidationSchema),
+  validateRequest(AdminValidations.createAdminValidationSchema),
   UserControllers.createAdmin,
+);
+
+router.post(
+  '/create-status/:id',
+  auth(USER_ROLE.admin),
+  validateRequest(UserValidation.changeValidationSchema),
+  UserControllers.changeStatus,
 );
 
 router.post(

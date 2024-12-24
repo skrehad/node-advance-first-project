@@ -214,9 +214,6 @@ const createAdminIntoDB = async (password: string, payload: TFaculty) => {
 
 // for get own data
 const getMeIntoDB = async (userId: string, role: string) => {
-  // const decoded = verifyToken(token, config.jwt_access_secret as string);
-
-  // const { userId, role } = decoded;
   let result = null;
 
   if (role === 'student') {
@@ -232,9 +229,19 @@ const getMeIntoDB = async (userId: string, role: string) => {
   return result;
 };
 
+// for change status
+const changeStatus = async (id: string, payload: { status: string }) => {
+  let result = await User.findByIdAndUpdate(id, payload, {
+    new: true,
+  });
+
+  return result;
+};
+
 export const UserServices = {
   createStudentIntoDB,
   createFacultyIntoDB,
   createAdminIntoDB,
   getMeIntoDB,
+  changeStatus,
 };
