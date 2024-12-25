@@ -16,56 +16,69 @@ import { Faculty } from '../faculty/faculty.model';
 import { TFaculty } from '../faculty/faculty.interface';
 import { Admin } from '../admin/admin.model';
 import { verifyToken } from '../auth/auth.utils';
+import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 const HttpStatus = require('http-status-ts');
 
-const createStudentIntoDB = async (password: string, studentData: TStudent) => {
-  //   create a user object
+const createStudentIntoDB = async (
+  file: any,
+  password: string,
+  payload: TStudent,
+) => {
+  // create a user object
   const userData: Partial<TUser> = {};
 
-  //    if password is not provided,then create a default password
+  //if password is not given , use default password
   userData.password = password || (config.default_password as string);
 
-  //   set student role
+  //set student role
   userData.role = 'student';
   // set student email
-  userData.email = studentData.email;
+  userData.email = payload.email;
 
+  // find academic semester info
   const admissionSemester = await AcademicSemester.findById(
-    studentData.admissionSemester,
+    payload.admissionSemester,
   );
 
   if (!admissionSemester) {
-    throw new Error('Admission semester not found');
+    throw new AppError(400, 'Admission semester not found');
   }
 
   const session = await mongoose.startSession();
 
   try {
     session.startTransaction();
-
-    //   manually create id
+    //set  generated id
     userData.id = await generateStudentId(admissionSemester);
 
-    // create a user (transaction)
-    const newUser = await User.create([userData], { session });
+    const imageName = `${userData.id}${payload?.name?.firstName}`;
+    const path = file?.path;
+    //send image to cloudinary
+    const { profileImg } = await sendImageToCloudinary(imageName, path);
 
-    //   create a student
+    // create a user (transaction-1)
+    const newUser = await User.create([userData], { session }); // array
+
+    //create a student
     if (!newUser.length) {
       throw new AppError(
         HttpStatus.HttpStatus.BAD_REQUEST,
-        'Failed to create User',
+        'Failed to create user',
       );
     }
-    // set id, _id as User
-    studentData.id = newUser[0].id;
-    studentData.user = newUser[0]._id; // reference id
+    // set id , _id as user
+    payload.id = newUser[0].id;
+    payload.user = newUser[0]._id; //reference _id
+    payload.profileImg = profileImg;
 
-    const newStudent = await Student.create([studentData], { session });
-    // create a user (transaction2)
+    // create a student (transaction-2)
+
+    const newStudent = await Student.create([payload], { session });
+
     if (!newStudent.length) {
       throw new AppError(
         HttpStatus.HttpStatus.BAD_REQUEST,
-        'Failed to create Student',
+        'Failed to create student',
       );
     }
 
@@ -73,14 +86,10 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
     await session.endSession();
 
     return newStudent;
-  } catch (error) {
+  } catch (err: any) {
     await session.abortTransaction();
     await session.endSession();
-
-    throw new AppError(
-      HttpStatus.HttpStatus.BAD_REQUEST,
-      'Failed to create Student',
-    );
+    throw new Error(err);
   }
 };
 
@@ -106,7 +115,7 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
   }
 
   const session = await mongoose.startSession();
-  console.log(HttpStatus.HttpStatus.OK);
+  // console.log(HttpStatus.HttpStatus.OK);
 
   try {
     session.startTransaction();

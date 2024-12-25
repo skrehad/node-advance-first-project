@@ -2,13 +2,16 @@ import { UserServices } from './user.service';
 import sendResponse from '../../utils/sendResponse';
 const HttpStatus = require('http-status-ts');
 import catchAsync from '../../utils/catchAsync';
-import AppError from '../../errors/AppError';
 
 const createStudent = catchAsync(async (req, res) => {
   const { password, student: studentData } = req.body;
 
-  // Save the data to the database
-  const result = await UserServices.createStudentIntoDB(password, studentData);
+  const result = await UserServices.createStudentIntoDB(
+    req.file,
+    password,
+    studentData,
+  );
+  // console.log(result);
 
   sendResponse(res, {
     statusCode: HttpStatus.HttpStatus.OK,

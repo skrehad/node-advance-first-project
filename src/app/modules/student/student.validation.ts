@@ -40,7 +40,10 @@ const localGuardianValidationSchema = z.object({
 // Define the Student schema
 const createStudentValidationSchema = z.object({
   body: z.object({
-    password: z.string().max(20, 'Password cannot exceed 20 characters'),
+    password: z
+      .string()
+      .max(20, 'Password cannot exceed 20 characters')
+      .optional(),
     student: z.object({
       name: userNameValidationSchema,
       gender: z.enum(['male', 'female', 'other'], {
@@ -69,7 +72,7 @@ const createStudentValidationSchema = z.object({
       guardian: guardianValidationSchema,
       localGuardian: localGuardianValidationSchema,
       admissionSemester: z.string(),
-      profileImg: z.string().optional(),
+      // profileImg: z.string().optional(),
     }),
   }),
 });
@@ -115,7 +118,7 @@ export const updateStudentValidationSchema = z.object({
       guardian: updateGuardianValidationSchema.optional(),
       localGuardian: updateLocalGuardianValidationSchema.optional(),
       admissionSemester: z.string().optional(),
-      profileImg: z.string().optional(),
+      // profileImg: z.string().optional(),
       academicDepartment: z.string().optional(),
     }),
   }),
