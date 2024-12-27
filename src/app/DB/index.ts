@@ -13,11 +13,18 @@ const superUser = {
 };
 
 const seedSuperAdmin = async () => {
-  //when database is connected, we will check is there any user who is super admin
-  const isSuperAdminExits = await User.findOne({ role: USER_ROLE.superAdmin });
+  try {
+    // Check if a super admin already exists
+    const isSuperAdminExists = await User.findOne({
+      role: USER_ROLE.superAdmin,
+    });
 
-  if (!isSuperAdminExits) {
-    await User.create(superUser);
+    if (!isSuperAdminExists) {
+      // Create super admin if not exists
+      await User.create(superUser);
+    }
+  } catch (error) {
+    console.error('Error seeding super admin:', error);
   }
 };
 

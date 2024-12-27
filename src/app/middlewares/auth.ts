@@ -9,8 +9,11 @@ const HttpStatus = require('http-status-ts');
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    // console.log(...requiredRoles);
+
     const token = req.headers.authorization;
 
+    // console.log('token................', token);
     // checking if the token is missing
     if (!token) {
       throw new AppError(
