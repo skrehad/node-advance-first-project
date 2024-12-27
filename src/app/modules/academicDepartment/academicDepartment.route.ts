@@ -16,15 +16,10 @@ router.post(
   AcademicDepartmentControllers.createAcademicDepartment,
 );
 
-router.get(
-  '/',
-  auth(USER_ROLE.admin),
-  AcademicDepartmentControllers.getAllAcademicDepartments,
-);
+router.get('/', AcademicDepartmentControllers.getAllAcademicDepartments);
 
 router.get(
   '/:departmentId',
-  auth(USER_ROLE.admin),
   AcademicDepartmentControllers.getSingleAcademicDepartment,
 );
 
