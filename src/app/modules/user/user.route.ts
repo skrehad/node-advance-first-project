@@ -60,7 +60,12 @@ router.post(
 
 router.post(
   '/me',
-  auth(USER_ROLE.admin, USER_ROLE.faculty, USER_ROLE.student),
+  auth(
+    USER_ROLE.superAdmin,
+    USER_ROLE.admin,
+    USER_ROLE.faculty,
+    USER_ROLE.student,
+  ),
   UserControllers.getMe,
 );
 
