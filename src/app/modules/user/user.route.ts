@@ -14,7 +14,7 @@ const router = express.Router();
 // for create student
 router.post(
   '/create-student',
-  // auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin),
   upload.single('file'),
   (req: Request, res: Response, next: NextFunction) => {
     // console.log(req.body);
@@ -34,7 +34,7 @@ router.post(
 
 router.post(
   '/create-admin',
-  auth(USER_ROLE.admin),
+  auth(USER_ROLE.superAdmin),
   validateRequest(AdminValidations.createAdminValidationSchema),
   UserControllers.createAdmin,
 );
