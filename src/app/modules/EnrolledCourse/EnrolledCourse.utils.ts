@@ -11,6 +11,8 @@ export const calculateGradeAndPoints = (totalMarks: number) => {
    * 60-79 B
    * 80-100 A
    */
+
+  // calculate the mark and update as a garde
   if (totalMarks >= 0 && totalMarks <= 19) {
     result = {
       grade: 'F',
