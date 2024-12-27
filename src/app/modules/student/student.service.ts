@@ -26,7 +26,12 @@ const getAllStudentsFromDb = async (query: Record<string, unknown>) => {
     .fields();
 
   const result = await studentQuery.modelQuery;
-  return result;
+  const meta = await studentQuery.countTotal();
+
+  return {
+    result,
+    meta,
+  };
 };
 const getSingleStudentsFromDb = (id: string) => {
   //  fineOne is custom query from services
