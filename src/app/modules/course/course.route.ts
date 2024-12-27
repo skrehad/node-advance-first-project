@@ -15,17 +15,9 @@ router.post(
   CourseControllers.createCourse,
 );
 
-router.get(
-  '/',
-  auth(USER_ROLE.admin, USER_ROLE.faculty, USER_ROLE.student),
-  CourseControllers.getAllCourses,
-);
+router.get('/', CourseControllers.getAllCourses);
 
-router.get(
-  '/:id',
-  auth(USER_ROLE.admin, USER_ROLE.faculty, USER_ROLE.student),
-  CourseControllers.getSingleCourse,
-);
+router.get('/:id', CourseControllers.getSingleCourse);
 
 router.patch(
   '/:id',
@@ -45,6 +37,7 @@ router.put(
 
 router.delete(
   '/:courseId/remove-faculties',
+  auth(USER_ROLE.admin),
   validateRequest(CourseValidations.facultiesWithCourseValidationSchema),
   CourseControllers.removeFacultiesFromCourse,
 );
