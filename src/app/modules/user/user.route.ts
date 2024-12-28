@@ -38,6 +38,7 @@ router.post(
   UserControllers.createFaculty,
 );
 
+//  for creating a admin
 router.post(
   '/create-admin',
   auth(USER_ROLE.superAdmin),
