@@ -28,6 +28,7 @@ router.patch(
 
 router.delete('/:id', auth(USER_ROLE.admin), CourseControllers.deleteCourse);
 
+// assign-faculties under a courses
 router.put(
   '/:courseId/assign-faculties',
   auth(USER_ROLE.admin),
@@ -35,11 +36,25 @@ router.put(
   CourseControllers.assignFacultiesWithCourse,
 );
 
+//  for get the all faculty under a course which i select
+router.get(
+  '/:courseId/get-faculties',
+  auth(USER_ROLE.admin, USER_ROLE.faculty, USER_ROLE.student),
+  CourseControllers.getFacultiesWithCourse,
+);
+
 router.delete(
   '/:courseId/remove-faculties',
   auth(USER_ROLE.admin),
   validateRequest(CourseValidations.facultiesWithCourseValidationSchema),
   CourseControllers.removeFacultiesFromCourse,
+);
+
+router.put(
+  '/:courseId/assign-faculties',
+  auth(USER_ROLE.admin),
+  validateRequest(CourseValidations.facultiesWithCourseValidationSchema),
+  CourseControllers.assignFacultiesWithCourse,
 );
 
 export const CourseRoutes = router;
