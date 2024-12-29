@@ -14,7 +14,17 @@ router.post(
   OfferedCourseControllers.createOfferedCourse,
 );
 
-router.get('/', OfferedCourseControllers.getAllOfferedCourses);
+router.get(
+  '/',
+  auth(USER_ROLE.admin, USER_ROLE.faculty),
+  OfferedCourseControllers.getAllOfferedCourses,
+);
+
+router.get(
+  '/my-offered-courses',
+  auth(USER_ROLE.student),
+  OfferedCourseControllers.getMyOfferedCourses,
+);
 
 router.get('/:id', OfferedCourseControllers.getSingleOfferedCourses);
 
