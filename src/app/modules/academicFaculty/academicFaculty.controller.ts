@@ -23,8 +23,7 @@ const getAllAcademicFaculties = catchAsync(async (req, res) => {
     statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All Academic faculties are find successfully',
-    meta: result.meta,
-    data: result.result,
+    data: result,
   });
 });
 

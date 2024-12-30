@@ -22,12 +22,11 @@ const getAllAcademicSemester = catchAsync(async (req, res) => {
     statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All Academic semester is find  successfully',
-    meta: result.meta,
-    data: result.result,
+    data: result,
   });
 });
 const getSingleAcademicSemester = catchAsync(async (req, res) => {
-  // semesterId ta holo route a jei mane a find korvo mane  '/:semesterId', amon aikhane ja divo akhane tai diye call korvo
+  // if i send semesterId in the backend then router should call( /:semesterId ) like it
   const { semesterId } = req.params;
   const result =
     await AcademicSemesterServices.getSingleAcademicSemesterIntoDB(semesterId);

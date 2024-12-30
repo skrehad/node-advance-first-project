@@ -14,35 +14,17 @@ const createAcademicSemesterIntoDB = async (payload: TAcademicSemester) => {
 
 const getAllAcademicSemesterIntoDB = async () => {
   const result = await AcademicSemester.find();
+
   return result;
 };
-// const getSingleAcademicSemesterIntoDB = async (id: string) => {
-//   const result = await AcademicSemester.findById({ id });
-//   return result;
-// };
 
-// _id aita holo backend a jei name a id thakve
+// _id (this is backend _id)
 const getSingleAcademicSemesterIntoDB = async (_id: string) => {
   const result = await AcademicSemester.findOne({
     _id: new mongoose.Types.ObjectId(_id),
   });
   return result;
 };
-
-// const updateSingleAcademicSemesterIntoDB = async (
-//   semesterId: string,
-//   academicData: TAcademicSemester,
-// ) => {
-//   const result = await AcademicSemester.findByIdAndUpdate(
-//     semesterId,
-//     academicData,
-//     {
-//       new: true,
-//     },
-//   );
-
-//   return result;
-// };
 
 const updateAcademicSemesterIntoDB = async (
   id: string,

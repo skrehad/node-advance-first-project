@@ -166,7 +166,7 @@ const getMyOfferedCoursesFromDB = async (
   const student = await Student.findOne({ id: userId });
   // find the student
   if (!student) {
-    throw new AppError(HttpStatus.HttpStatus.NOT_FOUND, 'User is noty found');
+    throw new AppError(HttpStatus.HttpStatus.NOT_FOUND, 'User is not found');
   }
 
   //find current ongoing semester

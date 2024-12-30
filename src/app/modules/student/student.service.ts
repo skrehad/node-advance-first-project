@@ -52,21 +52,21 @@ const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
 
   /*
 
-  // kiso na korle normally amne jay but amne gele  oi object ar sob kiso coila jaiya sodo ai data e thakvo
+  // if i update something like this then time whole object change (it is not right way)
    
   guardian: {
       fatherOccupation:"Teacher"
     }
 
 
-  // ai rokom kore pataite parle sodo jeita patamu oitai update hoivo baki gula thakvo
+  // this is the right way to update something
     guardian.fatherOccupation = Teacher
 
     name.firstName = 'A'
     name.lastName = 'Red'
   */
 
-  // agula hoitase data( guardian.fatherOccupation = Teacher) abave patanur jonno
+  // ( guardian.fatherOccupation = Teacher)
   if (name && Object.keys(name).length) {
     for (const [key, value] of Object.entries(name)) {
       modifiedUpdatedData[`name.${key}`] = value;
