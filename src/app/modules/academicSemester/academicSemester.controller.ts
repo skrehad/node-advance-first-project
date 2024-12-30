@@ -22,7 +22,8 @@ const getAllAcademicSemester = catchAsync(async (req, res) => {
     statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All Academic semester is find  successfully',
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 const getSingleAcademicSemester = catchAsync(async (req, res) => {

@@ -10,7 +10,8 @@ const getAllStudents = catchAsync(async (req, res) => {
     statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'Student is created successfully',
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 

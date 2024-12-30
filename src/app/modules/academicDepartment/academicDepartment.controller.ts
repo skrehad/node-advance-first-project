@@ -23,7 +23,8 @@ const getAllAcademicDepartments = catchAsync(async (req, res) => {
     statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'All academic departments are find successfully',
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 

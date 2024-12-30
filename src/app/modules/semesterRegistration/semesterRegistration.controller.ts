@@ -31,7 +31,8 @@ const getAllSemesterRegistrations = catchAsync(
       statusCode: HttpStatus.HttpStatus.OK,
       success: true,
       message: 'All Semester Registration is find successfully',
-      data: result,
+      meta: result.meta,
+      data: result.result,
     });
   },
 );
