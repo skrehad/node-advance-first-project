@@ -40,8 +40,8 @@ const getMyOfferedCourses = catchAsync(async (req: Request, res: Response) => {
     statusCode: HttpStatus.HttpStatus.OK,
     success: true,
     message: 'My Offered Courses find successfully !',
-    // meta: result.meta,
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 
