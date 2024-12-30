@@ -204,7 +204,7 @@ const getMyOfferedCoursesFromDB = async (
     },
     {
       $lookup: {
-        from: 'enrolledcourses',
+        from: 'enrolledCourses',
         let: {
           currentOngoingRegistrationSemester:
             currentOngoingRegistrationSemester._id,
@@ -237,7 +237,7 @@ const getMyOfferedCoursesFromDB = async (
     },
     {
       $lookup: {
-        from: 'enrolledcourses',
+        from: 'enrolledCourses',
         let: {
           currentStudent: student._id,
         },
