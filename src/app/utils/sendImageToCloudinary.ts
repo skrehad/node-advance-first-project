@@ -1,4 +1,4 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { UploadApiResponse, v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import multer from 'multer';
 import config from '../config';
@@ -16,15 +16,12 @@ export const sendImageToCloudinary = (
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(
       path,
-      { public_id: imageName },
+      { public_id: imageName.trim() },
       function (error, result) {
         if (error) {
           reject(error);
-        } else if (result) {
-          resolve(result); // Ensure result is defined
-        } else {
-          reject(new Error('Upload failed with an undefined result.'));
         }
+        resolve(result as UploadApiResponse);
         // delete a file asynchronously
         fs.unlink(path, (err) => {
           if (err) {
