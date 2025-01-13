@@ -22,11 +22,20 @@ const auth = (...requiredRoles: TUserRole[]) => {
       );
     }
 
-    // checking if the given token is valid
-    const decoded = jwt.verify(
-      token,
-      config.jwt_access_secret as string,
-    ) as JwtPayload;
+    let decoded;
+
+    try {
+      // checking if the given token is valid
+      decoded = jwt.verify(
+        token,
+        config.jwt_access_secret as string,
+      ) as JwtPayload;
+    } catch (error) {
+      throw new AppError(
+        HttpStatus.HttpStatus.NOT_FOUND,
+        'You are not authorized !',
+      );
+    }
 
     const { role, userId, iat } = decoded;
     // console.log(decoded);
