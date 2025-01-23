@@ -4,12 +4,12 @@ import AppError from '../../errors/AppError';
 import { TEnrolledCourse } from './EnrolledCourse.interface';
 import { OfferedCourse } from '../offeredCourse/offeredCourse.model';
 import EnrolledCourse from './EnrolledCourse.model';
-import { Student } from '../student/student.model';
 import { Course } from '../course/course.model';
 import { SemesterRegistration } from '../semesterRegistration/semesterRegistration.model';
 import { Faculty } from '../faculty/faculty.model';
 import { calculateGradeAndPoints } from './EnrolledCourse.utils';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { Student } from '../student/student.model';
 
 const createEnrolledCourseIntoDB = async (
   userId: string,
